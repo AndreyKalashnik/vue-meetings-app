@@ -6,15 +6,12 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue"
 import Firebase from "firebase"
-import Navigation from "@/components/Navigation.vue";
+import Navigation from "@/components/Navigation.vue"
+import db from "./db" //eslint-disable-line
 
-export default Vue.extend({
+export default({
   name: "App",
-  components: {
-    Navigation
-  },
   data: function() {
     return {
       user: null
@@ -26,6 +23,9 @@ export default Vue.extend({
         this.user = user.email
       }
     })
+  },
+  components: {
+    Navigation
   },
 })
 </script>
