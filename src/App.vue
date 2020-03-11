@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Navigation />
-    <router-view class="container" v-bind:user="user" @logout="logout" />
+    <Navigation v-bind:user="user" @logout="logout" />
+    <router-view class="container" v-bind:user="user" @addMeeting="addMeeting" />
   </div>
 </template>
 
@@ -25,12 +25,21 @@ export default {
           this.user = null;
           this.$router.push("login");
         });
+    },
+    addMeeting: function(payload) {
+      db.collection("users")
+        .doc(this.user.uid)
+        .collection("meetings")
+        .add({
+          name: payload,
+          createdAt: Firebase.firestore.FieldValue.serverTimestamp()
+        });
     }
   },
   mounted: function() {
     Firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.user = user.displayName;
+        this.user = user;
       }
     });
   },
