@@ -1,33 +1,43 @@
 <template>
   <div id="app">
     <Navigation />
-    <router-view class="container" v-bind:user="user"/>
+    <router-view class="container" v-bind:user="user" @logout="logout" />
   </div>
 </template>
 
 <script lang="ts">
-import Firebase from "firebase"
-import Navigation from "@/components/Navigation.vue"
-import db from "./db" //eslint-disable-line
+import Firebase from "firebase";
+import Navigation from "@/components/Navigation.vue";
+import db from "./db"; //eslint-disable-line
 
-export default({
+export default {
   name: "App",
   data: function() {
     return {
       user: null
+    };
+  },
+  methods: {
+    logout: function() {
+      Firebase.auth()
+        .signOut()
+        .then(() => {
+          this.user = null;
+          this.$router.push("login");
+        });
     }
   },
-  mounted: function(){
+  mounted: function() {
     Firebase.auth().onAuthStateChanged(user => {
-      if(user) {
-        this.user = user.email
+      if (user) {
+        this.user = user.displayName;
       }
-    })
+    });
   },
   components: {
     Navigation
-  },
-})
+  }
+};
 </script>
 
 <style lang="scss">

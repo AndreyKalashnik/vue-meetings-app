@@ -92,7 +92,12 @@ export default {
      if(!this.error) {
        Firebase.auth()
         .createUserWithEmailAndPassword(info.email, info.password)
-        .then(() => this.$router.replace("meetings"))
+        .then(userCredentials => {
+          return userCredentials.user.updateProfile({
+            displayName: info.displayName
+          })
+          .then(() => this.$router.replace("meetings"))
+        })
         .catch(error => this.error = error.message)
       }
     }
