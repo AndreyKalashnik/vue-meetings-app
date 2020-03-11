@@ -24,25 +24,10 @@
 </template>
 
 <script>
-// import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import db from "../db";
 export default {
   name: "home",
-  data: function() {
-    return {
-      user: null
-    }
-  },
-  mounted: function(){
-    db.collection("users")
-    .doc("7Y5Tz7GNYjAcFo4knZju")
-    .get()
-    .then(snapshot => {
-      this.user = snapshot.data().name;
-    })
-  },
-  components: {
-    // FontAwesomeIcon
+  props: {
+    user: String
   }
 };
 </script>
