@@ -48,12 +48,18 @@
                 <button class="btn btn-sm btn-outline-secondary" title="Delete Meeting">
                   <font-awesome-icon icon="trash" @click="$emit('deleteMeeting', item.id)"></font-awesome-icon>
                 </button>
-
-                <router-link class="btn btn-sm btn-outline-secondary" title="Check In" to="/">
+                <router-link
+                  class="btn btn-sm btn-outline-secondary"
+                  title="Check In"
+                  :to="`/checkin/${user.uid}/${item.id}`"
+                >
                   <font-awesome-icon icon="link"></font-awesome-icon>
                 </router-link>
-
-                <router-link class="btn btn-sm btn-outline-secondary" title="Attendees" to="/">
+                <router-link
+                  class="btn btn-sm btn-outline-secondary"
+                  title="Attendees"
+                  :to="`/attendees/${user.uid}/${item.id}`"
+                >
                   <font-awesome-icon icon="list-ul"></font-awesome-icon>
                 </router-link>
               </section>
@@ -81,6 +87,6 @@ export default {
       this.$refs.meetingName.focus();
     }
   },
-  props: ["user", "meetings"],
+  props: ["user", "meetings"]
 };
 </script>
