@@ -1,4 +1,5 @@
-# vue-firebase
+# SPA based on Vue.js front-end framework and Firebase cloud server engine. App contains authentication and registration, alongside with basic CRUD and searching for data.
+
 
 ## Project setup
 ```
